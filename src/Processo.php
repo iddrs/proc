@@ -64,7 +64,7 @@ class Processo {
         return key_exists($numero, $this->data);
     }
     
-    public function adicionaProcesso(string $numero, string $assunto, array $tags, string $local = 'Em uso'): void {
+    public function adicionaProcesso(string $numero, string $assunto, array $tags): void {
         if($this->existeProcesso($numero)){
             throw new Exception("Processo $numero já existe.");
         }
@@ -72,7 +72,7 @@ class Processo {
         $this->data[$numero] = [
             'subject' => $assunto,
             'tags' => $tags,
-            'local' => $local
+            'local' => [date('Y-m-d') => 'em uso']
         ];
         
         $this->salvaJson();
@@ -87,5 +87,10 @@ class Processo {
         if(file_put_contents($this->file, $json) === false){
             throw new Exception("Falha ao salvar dados em {$this->file}");
         }
+    }
+    
+    public function moveProcesso(string $numero, string $local, string $data){
+        $this->data[$numero]['local'][$data] = $local;
+        $this->salvaJson();
     }
 }

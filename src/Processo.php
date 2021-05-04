@@ -172,6 +172,7 @@ class Processo {
     }
     
     public function listaProcessos(): array {
+        ksort($this->data);//lista os processo por ordem crescente de número
         return $this->data;
     }
     
@@ -182,6 +183,8 @@ class Processo {
                 $tags[$tag][] = $number;
             }
         }
+        
+        ksort($tags);//lista as tags por ordem crescente
         return $tags;
     }
     
@@ -191,6 +194,9 @@ class Processo {
             $atual = $this->ondeEsta($number);
             $locais[current($atual)][] = $number;
         }
+        
+        ksort($locais);//ordena por ordem crescente os locais
+        
         return $locais;
     }
 

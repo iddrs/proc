@@ -167,5 +167,28 @@ class Processo {
         $localAtual[array_key_first($locais)] = $locais[array_key_first($locais)];
         return $localAtual;
     }
+    
+    public function listaProcessos(): array {
+        return $this->data;
+    }
+    
+    public function listaTags(): array {
+        $tags = [];
+        foreach ($this->data as $number => $item){
+            foreach ($item['tags'] as $tag){
+                $tags[$tag][] = $number;
+            }
+        }
+        return $tags;
+    }
+    
+    public function listaLocais(): array {
+        $locais = [];
+        foreach ($this->data as $number => $item){
+            $atual = $this->ondeEsta($number);
+            $locais[current($atual)][] = $number;
+        }
+        return $locais;
+    }
 
 }

@@ -1,0 +1,23 @@
+{
+    "name": "iddrs/proc",
+    "description": "Controle de números de processos administrativos com a linha de comando.",
+    "authors": [
+        {
+            "name": "Everton da Rosa",
+            "email": "everton3@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.0.3",
+        "ext-mbstring": "*",
+        "league/climate": "^3.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "IDDRS\\Proc\\": "src"
+        },
+        "files": [
+            "config.php"
+        ]
+    }
+}

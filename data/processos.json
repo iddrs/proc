@@ -1,0 +1,12 @@
+{
+    "2021.5.4.0": {
+        "subject": "Implanta\u00e7\u00e3o inicial do sistema para linha de comandos.",
+        "tags": ["sistema", "implanta\u00e7\u00e3o"],
+        "local": "digital"
+    },
+    "2021.5.4.1": {
+        "subject": "Teste #1",
+        "tags": ["sistema", "testes"],
+        "local": "Em uso"
+    }
+}

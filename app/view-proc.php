@@ -7,7 +7,7 @@ require_once 'vendor/autoload.php';
 
 $climate = new CLImate();
 
-$climate->description("Troca um processo de local.");
+$climate->description("Mostra os dados do processo.");
 
 $climate->arguments->add([
     'number' => [
@@ -15,21 +15,6 @@ $climate->arguments->add([
         'longPrefix' => 'number',
         'description' => 'Número do processo no formato AAAA.M.D.#',
         'required' => true,
-        'castTo' => 'string'
-    ],
-    'local' => [
-        'prefix' => 'l',
-        'longPrefix' => 'local',
-        'description' => 'Novo local do processo',
-        'required' => true,
-        'castTo' => 'string'
-    ],
-    'date' => [
-        'prefix' => 'd',
-        'longPrefix' => 'date',
-        'description' => 'Data, no formato AAAA-MM-DD em que a movimentação ocorreu',
-        'defaultValue' => null,
-        'required' => false,
         'castTo' => 'string'
     ]
 ]);
@@ -45,22 +30,22 @@ try {
     $climate->arguments->parse();
 
     $numero = $climate->arguments->get('number');
-    $local = $climate->arguments->get('local');
-    $data = $climate->arguments->get('date');
     
-    if($data === ''){
-        $data = date('Y-m-d');
-    }
 } catch (Exception) {
     $climate->usage();
     exit();
 }
 
 try {
-    $processos->moveProcesso($numero, $local, $data);
+    $data = $processos->processo($numero);
 } catch (Exception $ex) {
     $climate->error($ex->getTraceAsString());
     die();
 }
 
-$climate->info("Processo $numero movido para $local em $data");
+$climate->green()->bold()->flank($numero);
+$climate->bold()->out($data['subject']);
+$climate->red()->out(join(', ', $data['tags']));
+foreach ($data['local'] as $date => $local){
+    $climate->whisper($date)->tab()->out($local);
+}

@@ -10,7 +10,7 @@ $climate = new CLImate();
 $climate->description("Adiciona um novo processo.");
 
 $climate->arguments->add([
-    'procNumber' => [
+    'number' => [
         'prefix' => 'n',
         'longPrefix' => 'number',
         'description' => 'Número do processo no formato AAAA.M.D.#',
@@ -18,14 +18,14 @@ $climate->arguments->add([
         'required' => false,
         'castTo' => 'string'
     ],
-    'procSubject' => [
+    'subject' => [
         'prefix' => 's',
         'longPrefix' => 'subject',
         'description' => 'Assunto do processo.',
         'required' => true,
         'castTo' => 'string'
     ],
-    'procTags' => [
+    'tags' => [
         'prefix' => 't',
         'longPrefix' => 'tags',
         'description' => 'Lista, separada por vírgulas, com as TAGS do processo.',
@@ -45,7 +45,7 @@ try {
     $climate->arguments->parse();
 
     try {
-        $numero = $climate->arguments->get('procNumber');
+        $numero = $climate->arguments->get('number');
 
         if ($processos->existeProcesso($numero)) {
             $climate->error("Processo número $numero já existe.");
@@ -59,8 +59,8 @@ try {
         die();
     }
 
-    $assunto = $climate->arguments->get('procSubject');
-    $tags = array_map('trim', explode(',', $climate->arguments->get('procTags')));
+    $assunto = $climate->arguments->get('subject');
+    $tags = array_map('trim', explode(',', $climate->arguments->get('tags')));
 } catch (Exception) {
     $climate->usage();
     exit();

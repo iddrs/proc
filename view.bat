@@ -1,3 +1,3 @@
 @echo off
 
-php app/move-proc.php %*
+php app/view-proc.php %*

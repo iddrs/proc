@@ -9,10 +9,12 @@
     "2021.5.4.1": {
         "subject": "Teste #1",
         "tags": ["sistema", "testes"],
-        "2021-04-05": "digital"
+        "local": {
+            "2021-04-05": "digital"
+        }
     },
     "2021.5.4.2": {
-        "subject": "TEste de batch",
+        "subject": "Teste de batch",
         "tags": ["teste", "bat"],
         "local": {
             "2021-04-05": "digital",

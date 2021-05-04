@@ -17,8 +17,8 @@
         "subject": "Teste de batch",
         "tags": ["teste", "bat"],
         "local": {
-            "2021-04-05": "digital",
-            "2021-05-04": "cx1"
+            "2021-05-04": "cx1",
+            "2021-04-05": "digital"
         }
     }
 }

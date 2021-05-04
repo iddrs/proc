@@ -98,6 +98,9 @@ class Processo {
         if (!key_exists($numero, $this->data)) {
             throw new Exception("Processo $numero não encontrado.");
         }
+        
+        ksort($this->data[$numero]['local']);//ordena os locais por data crescente
+        
         return $this->data[$numero];
     }
 

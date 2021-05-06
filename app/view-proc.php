@@ -39,6 +39,7 @@ try {
 try {
     $data = $processos->processo($numero);
 } catch (Exception $ex) {
+    $climate->error($ex->getMessage());
     $climate->error($ex->getTraceAsString());
     die();
 }

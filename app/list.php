@@ -39,15 +39,14 @@ try {
 
 try {
     $climate->arguments->parse();
-
 } catch (Exception) {
     $climate->usage();
     exit();
 }
 
 try {
-    
-    if($climate->arguments->defined('process')){
+
+    if ($climate->arguments->defined('process')) {
         $lista = $processos->listaProcessos();
         $campo = 'processo';
         $tabela = [];
@@ -62,8 +61,8 @@ try {
             ];
         }
     }
-    
-    if($climate->arguments->defined('tags')){
+
+    if ($climate->arguments->defined('tags')) {
         $lista = $processos->listaTags();
         $campo = 'tags';
         $tabela = [];
@@ -74,8 +73,8 @@ try {
             ];
         }
     }
-    
-    if($climate->arguments->defined('local')){
+
+    if ($climate->arguments->defined('local')) {
         $lista = $processos->listaLocais();
         $campo = 'local';
         $tabela = [];
@@ -86,14 +85,16 @@ try {
             ];
         }
     }
-    
+
+    if (sizeof($lista) > 0) {
+        $climate->table($tabela);
+    } else {
+        $climate->backgroundLightYellow("Nenhum resultado encontrado para $campo.");
+    }
 } catch (Exception $ex) {
+    $climate->error($ex->getMessage());
     $climate->error($ex->getTraceAsString());
+    $climate->usage();
     die();
 }
 
-if(sizeof($lista) > 0){
-    $climate->table($tabela);
-}else{
-    $climate->backgroundLightYellow("Nenhum resultado encontrado para $campo.");
-}

@@ -59,6 +59,7 @@ try {
 try {
     $processos->moveProcesso($numero, $local, $data);
 } catch (Exception $ex) {
+    $climate->error($ex->getMessage());
     $climate->error($ex->getTraceAsString());
     die();
 }

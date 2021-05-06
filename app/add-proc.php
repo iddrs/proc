@@ -69,6 +69,7 @@ try {
 try {
     $processos->adicionaProcesso($numero, $assunto, $tags);
 } catch (Exception $ex) {
+    $climate->error($ex->getMessage());
     $climate->error($ex->getTraceAsString());
     die();
 }

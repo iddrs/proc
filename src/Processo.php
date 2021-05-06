@@ -90,6 +90,9 @@ class Processo {
     }
 
     public function moveProcesso(string $numero, string $local, string $data) {
+        if(!$this->existeProcesso($numero)){
+            throw new Exception("Processo $numero não encontrado.");
+        }
         $this->data[$numero]['local'][$data] = $local;
         $this->salvaJson();
     }

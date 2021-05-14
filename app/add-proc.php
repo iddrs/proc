@@ -31,6 +31,14 @@ $climate->arguments->add([
         'description' => 'Lista, separada por vírgulas, com as TAGS do processo.',
         'required' => true,
         'castTo' => 'string'
+    ],
+    'local' => [
+        'prefix' => 'l',
+        'longPrefix' => 'local',
+        'description' => 'O local onde o processo se encontra.',
+        'required' => false,
+        'castTo' => 'string',
+        'defaultValue' => 'em uso'
     ]
 ]);
 
@@ -61,13 +69,14 @@ try {
 
     $assunto = $climate->arguments->get('subject');
     $tags = array_map('trim', explode(',', $climate->arguments->get('tags')));
+    $local = $climate->arguments->get('local');
 } catch (Exception) {
     $climate->usage();
     exit();
 }
 
 try {
-    $processos->adicionaProcesso($numero, $assunto, $tags);
+    $processos->adicionaProcesso($numero, $assunto, $tags, $local);
 } catch (Exception $ex) {
     $climate->error($ex->getMessage());
     $climate->error($ex->getTraceAsString());
@@ -78,3 +87,4 @@ $tags = join(', ', $tags);
 $climate->out("Número: <green>{$numero}</green>");
 $climate->out("Assunto: <bold>$assunto</bold>");
 $climate->out("Tags: <blue>$tags</blue>");
+$climate->out("Local: <blue>$local</blue>");

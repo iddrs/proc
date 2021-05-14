@@ -64,7 +64,7 @@ class Processo {
         return key_exists($numero, $this->data);
     }
 
-    public function adicionaProcesso(string $numero, string $assunto, array $tags): void {
+    public function adicionaProcesso(string $numero, string $assunto, array $tags, string $local): void {
         if ($this->existeProcesso($numero)) {
             throw new Exception("Processo $numero já existe.");
         }
@@ -72,7 +72,7 @@ class Processo {
         $this->data[$numero] = [
             'subject' => $assunto,
             'tags' => $tags,
-            'local' => [date('Y-m-d') => 'em uso']
+            'local' => [date('Y-m-d') => $local]
         ];
 
         $this->salvaJson();

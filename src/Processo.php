@@ -50,7 +50,7 @@ class Processo {
         $sequencia = $boom[3];
 
         if (
-                $ano == date('Y') && $mes == date('m') && $dia == date('d')
+                $ano == date('Y') && $mes == date('n') && $dia == date('j')
         ) {
             $sequencia += 1;
 

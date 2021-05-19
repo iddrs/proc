@@ -3,7 +3,7 @@
 echo "Iniciando"
 git pull
 
-powershell.exe -NoLogo cmd/
+powershell.exe -NoLogo -Path cmd
 
 echo "Finalizando"
 git add .

@@ -38,27 +38,41 @@ class Processo {
      * @return string
      */
     public function getProximoNumero(): string {
-        $proximo = date('Y.n.j.') . "0";
+        $ano = date('Y');
+        $mes = date('n');
+        $dia = date('j');
+        $seq = 0;
 
         $numeros = array_keys($this->data);
-        sort($numeros);
-        $ultimo = array_pop($numeros);
-        $boom = explode('.', $ultimo);
-        $ano = $boom[0];
-        $mes = $boom[1];
-        $dia = $boom[2];
-        $sequencia = $boom[3];
-
-        if (
-                $ano == date('Y') && $mes == date('n') && $dia == date('j')
-        ) {
-            $sequencia += 1;
-
-            $proximo = "$ano.$mes.$dia.$sequencia";
+        
+        foreach ($numeros as $item){
+            if(str_starts_with($item, "$ano.$mes.$dia.")){
+                $seq++;
+            }
         }
+        
 
-        return $proximo;
+        return "$ano.$mes.$dia.$seq";
     }
+//    public function getProximoNumero(): string {
+//        $proximo = date('Y.n.j.') . "0";
+//
+//        $numeros = array_keys($this->data);
+//        sort($numeros);
+//        $ultimo = array_pop($numeros);
+//        $boom = explode('.', $ultimo);
+//        $ano = $boom[0];
+//        $mes = $boom[1];
+//        $dia = $boom[2];
+//        $sequencia = $boom[3];
+//        if ($ano == date('Y') && $mes == date('n') && $dia == date('j')) {
+//            $sequencia += 1;
+//
+//            $proximo = "$ano.$mes.$dia.$sequencia";
+//        }
+//
+//        return $proximo;
+//    }
 
     public function existeProcesso(string $numero): bool {
         return key_exists($numero, $this->data);

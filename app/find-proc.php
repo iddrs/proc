@@ -3,7 +3,7 @@
 use IDDRS\Proc\Processo;
 use League\CLImate\CLImate;
 
-require_once 'vendor/autoload.php';
+require_once '../vendor/autoload.php';
 
 $climate = new CLImate();
 

@@ -1,3 +1,3 @@
 <?php
 
-define('DATA_JSON', 'data/processos.json');
+define('DATA_JSON', '../data/processos.json');
